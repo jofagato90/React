@@ -4,23 +4,56 @@ import Example from "./components/example";
 import Footer from "./components/footer";
 import Header from "./components/header";
 import UserList from "./components/user/UserList";
-import UserForm from "./components/user/UserForm";
+import Login from "./components/auth/Login";
+import UserFormCreate from "./components/user/UserFormCreate";
+import UserFormEdit from "./components/user/UserFormEdit";
+import { useDispatch } from 'react-redux'
+import { useEffect } from "react";
+import { loginSuccess } from "./features/authSlice";
+import PrivateRoute from "./components/PrivateRoute";
+import ChangePassword from "./components/auth/ChangePassword";
+import HouseFormCreate from "./components/house/HouseFormCreate";
+
+import Chat from "./components/chat/Chat";
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const sessionData = localStorage.getItem('sessionData');
+    if(sessionData) {
+      dispatch(loginSuccess(JSON.parse(sessionData)))      
+    }
+  })
+
   return (
-    <div style={{
-      backgroundRepeat: 'repeat',
-backgroundSize: 'cover',backgroundImage:  `url("https://www.fundacionaquae.org/wp-content/uploads/2019/02/nubes-y-cambio-climatico-1024x576.jpg")`}}>      
+    <>      
       <BrowserRouter>
         <Header />
         <Routes>
-        <Route path="/" element={<Example />} />
-          <Route path="/user" element={<UserList />} />
-          <Route path="/userForm" element={<UserForm />} />
+          {/* Rutas Privadas */}
+          <Route path="/" element={<PrivateRoute Component={Example} />} />
+          <Route path="/user" element={<PrivateRoute Component={UserList} />} />
+          <Route path="/user/:id" element={<PrivateRoute Component={UserFormEdit} />} />
+          <Route path="/change-password" element={<PrivateRoute Component={ChangePassword} />} />
+          
+          {/* Rutas de Chat */}
+          <Route path="/chat" element={<PrivateRoute Component={Chat} />} />
+
+          {/* Rutas de casas */}
+          <Route path="/create-house" element={<PrivateRoute Component={HouseFormCreate} />} />
+
+          {/* Rutas de Chat */}
+          <Route path="/chat" element={<PrivateRoute Component={Chat} />} />
+
+          {/* Rutas Publicas */}
+          <Route path="/create-user" element={<UserFormCreate />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </BrowserRouter>
-    </div>
+    </>
   );
 }
 

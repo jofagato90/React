@@ -1,11 +1,15 @@
 
-export default function Footer(){
+export default function Footer() {
 
     return (
-        <div  style={{
-            backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',backgroundImage:  `url("https://img.freepik.com/foto-gratis/cielo-nocturno-ilumina-majestuoso-paisaje-invernal-montanas-ia-generativa_188544-12465.jpg")`}}>
-            <h1>Footer</h1>
+        <div className="bg-gray-800 text-white py-4 flex justify-center ...">
+            <div>
+                <h1>Proyecto React</h1>
+                <p>
+                    <h2>Desarrollado por Jonathan Garzon</h2>
+                </p>
+            </div>
+
         </div>
     );
 }
