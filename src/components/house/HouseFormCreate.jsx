@@ -12,15 +12,28 @@ export default function HouseFormCreate(){
     const [file, setFile] = useState(null);
   
     const handleSubmit = async (e) => {
-        e.preventDefault();        
+        e.preventDefault();     
+        
+        if (!e || !e.target) {
+            console.error("Evento o e.target es nulo o indefinido.");
+            return;
+        }
+
         const newHouse = {
             address: e.target.address.value,
-            department: e.target.department.value.split("-")[1],
+            state: e.target.state.value.split("-")[1],
             city: e.target.city.value,
-            //TODO: Implement other properties
+            size: e.target.size.value,
+            type: e.target.type.value,
+            price: e.target.price.value,
+            code: e.target.code.value,
+
+        
         }
+        
         try {
-            const response = await createHouse(newHouse)          
+            const response = await createHouse(newHouse)    
+            console.log(response)      
             if(response.data.status == "error"){
                 Swal.fire({
                     position: "top-end",
@@ -38,11 +51,11 @@ export default function HouseFormCreate(){
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "Usuario Creado Correctamente",
+                    title: "Casa Creada Correctamente",
                     showConfirmButton: false,
                     timer: 1500
                 }).then(() => {
-                    navigate('/user') // Hacemos la redireccion
+                    navigate('/house') // Hacemos la redireccion
                 });
             }
         } catch (error) {
@@ -54,6 +67,6 @@ export default function HouseFormCreate(){
     return (
         <HouseForm props={{handleSubmit: handleSubmit, 
                         handleChangeAvatar: null, 
-                        user:null}} />
+                        house:null}} />
     );
 }

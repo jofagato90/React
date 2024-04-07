@@ -4,7 +4,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 export const apiMessageSlice = createApi({
     reducerPath: "messageApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:3003"
+        baseUrl: "https://nodejs-chi-seven.vercel.app/"
     }),
     endpoints: (builder) => ({
         getMessages: builder.query({

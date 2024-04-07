@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import numberReducer from './features/numberSlice';
 import usersReducer from './features/userSlice';
+import housesReducer from './features/houseSlice'
 import authReducer from './features/authSlice';
 import { apiSlice } from './features/api/apiSlice';
 import { apiHousesSlice } from './features/api/apiHousesSlice';
@@ -17,6 +18,7 @@ const store = configureStore({
         [apiMessageSlice.reducerPath]: apiMessageSlice.reducer,
         number: numberReducer,
         users: usersReducer,
+        houses: housesReducer,
         auth: authReducer,
     },
     middleware: (getDefaultMiddleware) =>

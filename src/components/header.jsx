@@ -46,6 +46,11 @@ export default function Header() {
             Chat
            </Link>
            </li>
+           <li>
+            <Link to="/house" className="hover:text-blue-500">
+            Casas
+           </Link>
+           </li>
           </>
         )}
         <li>
@@ -61,7 +66,7 @@ export default function Header() {
           <>          
             <div className="relative">
               <img
-                src={`http://localhost:3003/${user.avatar}`}
+                src={`https://nodejs-chi-seven.vercel.app/${user.avatar}`}
                 className="rounded-full h-10 w-10 cursor-pointer"
                 onClick={toggleMenu}
               />
